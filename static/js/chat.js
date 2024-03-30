@@ -58,6 +58,9 @@ $("form").submit(function (evt) {
     type = "get-joke";
   } else if (text === "/members") {
     type = "members";
+  } else if (text.startsWith("/name")) {
+    text = text.split(" ")[1];
+    type = "changeName";
   } else {
     type = "chat";
   }

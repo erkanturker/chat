@@ -76,6 +76,17 @@ class ChatUser {
     });
   }
 
+  /* Change the name of the current user and broadcast a notification to the room.*/
+
+  handleChangeName(name) {
+    const prevName = this.name;
+    this.name = name;
+    this.room.broadcast({
+      type: "note",
+      text: `${prevName} changed their name to "${this.name}".`,
+    });
+  }
+
   /** Handle messages from client:
    *
    * - {type: "join", name: username} : join
@@ -89,6 +100,7 @@ class ChatUser {
     else if (msg.type === "chat") this.handleChat(msg.text);
     else if (msg.type === "get-joke") this.handleJoke();
     else if (msg.type === "members") this.handleUsers();
+    else if (msg.type === "changeName") this.handleChangeName(msg.text);
     else throw new Error(`bad message: ${msg.type}`);
   }
 
