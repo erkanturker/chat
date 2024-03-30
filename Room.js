@@ -59,9 +59,10 @@ class Room {
 
   /** send message to all members in a room. */
 
-  broadcast(data) {
+  broadcast(sender, data) {
     for (let member of this.members) {
-      member.send(JSON.stringify(data));
+      const senderName = sender === member ? "You:" : sender.name;
+      member.send(JSON.stringify({ ...data, name: senderName }));
     }
   }
 

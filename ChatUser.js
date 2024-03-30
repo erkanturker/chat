@@ -33,7 +33,7 @@ class ChatUser {
   handleJoin(name) {
     this.name = name;
     this.room.join(this);
-    this.room.broadcast({
+    this.room.broadcast(this, {
       type: "note",
       text: `${this.name} joined "${this.room.name}".`,
     });
@@ -42,7 +42,7 @@ class ChatUser {
   /** handle a chat: broadcast to room. */
 
   handleChat(text) {
-    this.room.broadcast({
+    this.room.broadcast(this, {
       name: this.name,
       type: "chat",
       text: text,
@@ -81,7 +81,7 @@ class ChatUser {
   handleChangeName(name) {
     const prevName = this.name;
     this.name = name;
-    this.room.broadcast({
+    this.room.broadcast(this, {
       type: "note",
       text: `${prevName} changed their name to "${this.name}".`,
     });
