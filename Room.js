@@ -51,6 +51,12 @@ class Room {
       member.send(JSON.stringify(data));
     }
   }
+
+  /** reply from server to current user again in a room. */
+  selfCast(currentUser, data) {
+    currentUser.send(JSON.stringify(data));
+  }
+  
 }
 
 module.exports = Room;
