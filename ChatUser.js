@@ -60,6 +60,22 @@ class ChatUser {
     });
   }
 
+  /** show all users: self cast all users in room */
+
+  async handleUsers() {
+    // Get all members in the room
+    const listNames = await this.room.getAllMembers().join(", ");
+
+    // Construct the message text
+    const text = `In Room: ${listNames}`;
+
+    this.room.selfCast(this, {
+      type: "chat",
+      text,
+      name: "Server",
+    });
+  }
+
   /** Handle messages from client:
    *
    * - {type: "join", name: username} : join
@@ -72,6 +88,7 @@ class ChatUser {
     if (msg.type === "join") this.handleJoin(msg.name);
     else if (msg.type === "chat") this.handleChat(msg.text);
     else if (msg.type === "get-joke") this.handleJoke();
+    else if (msg.type === "members") this.handleUsers();
     else throw new Error(`bad message: ${msg.type}`);
   }
 

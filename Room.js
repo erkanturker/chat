@@ -32,6 +32,12 @@ class Room {
     this.members = new Set();
   }
 
+  /** get all members name and return as array from  the room room. */
+  getAllMembers() {
+    const members = Array.from(this.members);
+    return members.map((m) => m.name);
+  }
+
   /** member joining a room. */
 
   join(member) {
@@ -56,7 +62,6 @@ class Room {
   selfCast(currentUser, data) {
     currentUser.send(JSON.stringify(data));
   }
-  
 }
 
 module.exports = Room;

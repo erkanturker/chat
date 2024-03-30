@@ -56,6 +56,8 @@ $("form").submit(function (evt) {
 
   if (text === "/joke") {
     type = "get-joke";
+  } else if (text === "/members") {
+    type = "members";
   } else {
     type = "chat";
   }
