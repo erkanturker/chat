@@ -53,6 +53,7 @@ $("form").submit(function (evt) {
 
   let text = $("#m").val();
   let type;
+  let user;
 
   if (text === "/joke") {
     type = "get-joke";
@@ -61,11 +62,16 @@ $("form").submit(function (evt) {
   } else if (text.startsWith("/name")) {
     text = text.split(" ")[1];
     type = "changeName";
+  } else if (text.startsWith("/priv")) {
+    const arrText = text.split(" ");
+    user = arrText[1];
+    text = arrText[2];
+    type = "private";
   } else {
     type = "chat";
   }
 
-  let data = { type, text };
+  let data = { type, text, user };
   ws.send(JSON.stringify(data));
 
   $("#m").val("");

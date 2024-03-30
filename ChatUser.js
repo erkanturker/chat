@@ -87,6 +87,22 @@ class ChatUser {
     });
   }
 
+  /** * Handles sending a private message from the current user to another user. */
+
+  async handlePrivateMsg(receiver, text) {
+    const chatUser = this.room.getUserByName(receiver);
+
+    if (!chatUser) {
+      text = "user is not found";
+    } else {
+      this.room.sendPrivateMessage(this, chatUser, {
+        type: "chat",
+        text,
+        name: `Private message from sender: ${this.name}`,
+      });
+    }
+  }
+
   /** Handle messages from client:
    *
    * - {type: "join", name: username} : join
@@ -101,6 +117,7 @@ class ChatUser {
     else if (msg.type === "get-joke") this.handleJoke();
     else if (msg.type === "members") this.handleUsers();
     else if (msg.type === "changeName") this.handleChangeName(msg.text);
+    else if (msg.type === "private") this.handlePrivateMsg(msg.user, msg.text);
     else throw new Error(`bad message: ${msg.type}`);
   }
 

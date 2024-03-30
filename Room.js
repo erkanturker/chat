@@ -38,6 +38,13 @@ class Room {
     return members.map((m) => m.name);
   }
 
+  /** Retrieves a user from the room by their username. */
+  getUserByName(name) {
+    const user = [...this.members].find((member) => member.name === name);
+
+    return user || null;
+  }
+
   /** member joining a room. */
 
   join(member) {
@@ -61,6 +68,18 @@ class Room {
   /** reply from server to current user again in a room. */
   selfCast(currentUser, data) {
     currentUser.send(JSON.stringify(data));
+  }
+
+  /** Sends a private message from the sender to the receiver, and notifies both sender and receiver. */
+
+  sendPrivateMessage(sender, receiver, data) {
+    sender.send(
+      JSON.stringify({
+        ...data,
+        name: `You: private message to: ${receiver.name}`,
+      })
+    );
+    receiver.send(JSON.stringify(data));
   }
 }
 
