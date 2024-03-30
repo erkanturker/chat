@@ -1,7 +1,5 @@
 ## **GroupChat**
 
-[Download Starter Code](https://curric.springboard.com/software-engineering-career-track/default/exercises/websocket-groupchat.zip)
-
 GroupChat is an Express-based app that uses websocks for a live, multi-room chat system.
 
 In this exercise, you’ll explore good OO design for more sophisticated applications, as well as get some hands-on practice with websockets. The goal of this exercise is to read and understand the code, if you’d like, there are some additional features you can implement.
